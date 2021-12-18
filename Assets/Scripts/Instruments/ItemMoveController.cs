@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Класс для перемещения объектов
+/// </summary>
 public class ItemMoveController : MonoBehaviour
 {
     [Tooltip("Основная камера")]
@@ -16,7 +19,7 @@ public class ItemMoveController : MonoBehaviour
     // Rigidbody текущего объекта
     private Rigidbody itemRigidbody;
 
-    // сохраняем параметры useGravity и freezeRotation,
+    // нужно сохранить параметры useGravity и freezeRotation,
     // чтобы вернуть при отпускании объекта
     private bool itemUseGravity;
     private bool itemFreezeRotation;
