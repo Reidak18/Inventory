@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-// типы событий - добавление и доставание из рюкзака
-public enum EventType { PutIn, PullOut };
-
 /// <summary>
 /// Класс для отправки запросов на сервер
 /// </summary>
 public class ServerRequestController : MonoBehaviour
 {
     [Tooltip("Ссылка на сервер для отправки запросов")]
-    public string ServerUrl = "https://devo4ka11.elysium.today/inventory/status ";
+    public string ServerUrl = "https://devo4ka11.elysium.today/inventory/status";
     [Tooltip("Имя ключа авторизации")]
     public string authKey = "auth";
     [Tooltip("Значение ключа авторизации")]
@@ -20,6 +17,9 @@ public class ServerRequestController : MonoBehaviour
 
     [Tooltip("Контроллер рюкзака, на события которого подписываемся")]
     public BackpackController backpackController;
+
+    // типы событий - добавление и доставание из рюкзака
+    public enum EventType { PutIn, PullOut };
 
     private void Awake()
     {
