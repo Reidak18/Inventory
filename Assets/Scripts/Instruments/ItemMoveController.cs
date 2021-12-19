@@ -11,8 +11,6 @@ public class ItemMoveController : MonoBehaviour
     public Camera GameCamera;
     [Tooltip("Высота, на которую приподнимается объект при нажатии")]
     public float StartHeight;
-    [Tooltip("Шаг при изменении высоты")]
-    public float HeightStep;
 
     // текущий объект
     private ItemController currentItem;
@@ -72,7 +70,7 @@ public class ItemMoveController : MonoBehaviour
                 // перемещаем объект за курсором мыши и можем менять высоту колесиком
                 Vector3 mousePosition = GetMouseWorldPosition();
                 // задаем координаты с добавлением смещения
-                itemRigidbody.MovePosition(new Vector3(mousePosition.x, itemRigidbody.position.y + Input.GetAxis("Mouse ScrollWheel") * HeightStep, mousePosition.z) + offset);
+                itemRigidbody.MovePosition(new Vector3(mousePosition.x, itemRigidbody.position.y, mousePosition.z) + offset);
             } 
         }
         else if (currentItem)
