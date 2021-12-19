@@ -24,6 +24,10 @@ public class ItemMoveController : MonoBehaviour
     private bool itemUseGravity;
     private bool itemFreezeRotation;
 
+    // используется для смещения относительно
+    // точки нажатия к координатам объекта
+    private Vector3 offset;
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
@@ -55,14 +59,20 @@ public class ItemMoveController : MonoBehaviour
                         itemRigidbody.freezeRotation = true;
                         // приподнимаем объект
                         itemRigidbody.MovePosition(itemRigidbody.position += new Vector3(0, StartHeight, 0));
+
+                        // вычисляем смещение
+                        offset = itemRigidbody.position - GetMouseWorldPosition();
+                        // высоту не учитываем, иначе будет бесконечно подниматься
+                        offset.y = 0;
                     }
                 }
             }
             else
             {
                 // перемещаем объект за курсором мыши и можем менять высоту колесиком
-                Vector3 mousePosition = GameCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, GameCamera.transform.position.y));
-                itemRigidbody.MovePosition(new Vector3(mousePosition.x, itemRigidbody.position.y + Input.GetAxis("Mouse ScrollWheel") * HeightStep, mousePosition.z));
+                Vector3 mousePosition = GetMouseWorldPosition();
+                // задаем координаты с добавлением смещения
+                itemRigidbody.MovePosition(new Vector3(mousePosition.x, itemRigidbody.position.y + Input.GetAxis("Mouse ScrollWheel") * HeightStep, mousePosition.z) + offset);
             } 
         }
         else if (currentItem)
@@ -74,5 +84,13 @@ public class ItemMoveController : MonoBehaviour
             currentItem = null;
             itemRigidbody = null;
         }
+    }
+
+    /// <summary>
+    /// Получение точки мировых координат из координат точки клика на экране
+    /// </summary>
+    private Vector3 GetMouseWorldPosition()
+    {
+        return GameCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, GameCamera.transform.position.y));
     }
 }
