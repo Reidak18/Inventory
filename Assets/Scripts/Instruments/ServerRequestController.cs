@@ -32,9 +32,6 @@ public class ServerRequestController : MonoBehaviour
     /// </summary>
     private void OnPutIn(ItemController item)
     {
-        // ToDo: стереть
-        Debug.Log("PUT IN");
-        // ToDo: проверить
         StartCoroutine(SendRequest(item.Id, EventType.PutIn.ToString()));
     }
 
@@ -43,9 +40,6 @@ public class ServerRequestController : MonoBehaviour
     /// </summary>
     private void OnPullOut(ItemController item)
     {
-        // ToDo: стереть
-        Debug.Log("PULL OUT");
-        // ToDo: проверить
         StartCoroutine(SendRequest(item.Id, EventType.PullOut.ToString()));
     }
     
